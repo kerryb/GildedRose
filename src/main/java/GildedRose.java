@@ -29,7 +29,7 @@ public class GildedRose {
 
   private static void adjustQuality(final Item item) {
     if (!getsBetterWithAge(item)) {
-      if (item.getQuality() > 0) {
+      if (hasSomeQualityLeft(item)) {
         if (!isLegendary(item)) {
           decrementQuality(item);
         }
@@ -60,14 +60,14 @@ public class GildedRose {
   }
 
   private static void adjustQualityAgainForSomeReason(final Item item) {
-    if (item.getSellIn() < 0) {
+    if (hasExpired(item)) {
       if ("Aged Brie".equals(item.getName())) {
         if (isBelowMaximumQuality(item)) {
           incrementQuality(item);
         }
       } else {
         if (!isBackstagePass(item)) {
-          if (item.getQuality() > 0) {
+          if (hasSomeQualityLeft(item)) {
             if (!isLegendary(item)) {
               decrementQuality(item);
             }
@@ -79,12 +79,20 @@ public class GildedRose {
     }
   }
 
-  private static boolean isBackstagePass(final Item item) {
-    return "Backstage passes to a TAFKAL80ETC concert".equals(item.getName());
+  private static boolean hasExpired(final Item item) {
+    return item.getSellIn() < 0;
+  }
+
+  private static boolean hasSomeQualityLeft(final Item item) {
+    return item.getQuality() > 0;
   }
 
   private static boolean isBelowMaximumQuality(final Item item) {
     return item.getQuality() < 50;
+  }
+
+  private static boolean isBackstagePass(final Item item) {
+    return "Backstage passes to a TAFKAL80ETC concert".equals(item.getName());
   }
 
   private static boolean isLegendary(final Item item) {
