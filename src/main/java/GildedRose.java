@@ -49,8 +49,10 @@ public class GildedRose {
     }
   }
 
-  private static void decrementSellin(final Item item) {
-    item.setSellIn(item.getSellIn() - 1);
+  private static void decrementSellIn(final Item item) {
+    if (!isLegendary(item)) {
+      item.setSellIn(item.getSellIn() - 1);
+    }
   }
 
   private static void adjustQualityAgainForSomeReason(final Item item) {
@@ -91,12 +93,6 @@ public class GildedRose {
 
   private static boolean getsBetterWithAge(final Item item) {
     return "Aged Brie".equals(item.getName()) || isBackstagePass(item);
-  }
-
-  private static void decrementSellIn(final Item item) {
-    if (!isLegendary(item)) {
-      decrementSellin(item);
-    }
   }
 
   private static void incrementQuality(final Item item) {
