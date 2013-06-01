@@ -14,14 +14,10 @@ public class DecreasingQualityAdjustmentStrategy implements Strategy {
 
   @Override
   public void run() {
-    item.decreaseQualityBy(decrement());
-  }
-
-  private int decrement() {
     if (item.hasExpired()) {
-      return rate * 2;
+      item.decreaseQualityBy(rate * 2);
     } else {
-      return rate;
+      item.decreaseQualityBy(rate);
     }
   }
 }
