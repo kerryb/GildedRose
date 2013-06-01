@@ -11,6 +11,6 @@ public class LegendaryItem extends UpdatableItem {
 
   @Override
   protected Strategy qualityAdjustmentStrategy() {
-    return new DefaultQualityAdjustmentStrategy(item);
+    return new FixedQualityAdjustmentStrategy();
   }
 }

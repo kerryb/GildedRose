@@ -11,7 +11,7 @@ public class DefaultQualityAdjustmentStrategy implements Strategy {
     if (getsBetterWithAge()) {
       increaseQuality(item, qualityIncrement());
     } else {
-      if (!isLegendary() && hasSomeQualityLeft()) {
+      if (hasSomeQualityLeft()) {
         decrementQuality();
       }
     }
@@ -22,7 +22,7 @@ public class DefaultQualityAdjustmentStrategy implements Strategy {
           increaseQuality(item, 1);
         }
       } else {
-        if (!isBackstagePass() && !isLegendary() && hasSomeQualityLeft()) {
+        if (!isBackstagePass() && hasSomeQualityLeft()) {
           decrementQuality();
         } else {
           item.setQuality(0);
@@ -45,10 +45,6 @@ public class DefaultQualityAdjustmentStrategy implements Strategy {
 
   private boolean isBackstagePass() {
     return "Backstage passes to a TAFKAL80ETC concert".equals(item.getName());
-  }
-
-  private boolean isLegendary() {
-    return "Sulfuras, Hand of Ragnaros".equals(item.getName());
   }
 
   private boolean getsBetterWithAge() {
