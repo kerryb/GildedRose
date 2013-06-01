@@ -16,6 +16,8 @@ public abstract class UpdatableItem {
       return new LegendaryItem(item);
     } else if (isBackstagePass(item)) {
       return new BackStagePass(item);
+    } else if (improvesWithAge(item)) {
+      return new ImprovingWithAgeItem(item);
     } else {
       return new NormalItem(item);
     }
@@ -31,5 +33,9 @@ public abstract class UpdatableItem {
 
   private static boolean isBackstagePass(final Item item) {
     return "Backstage passes to a TAFKAL80ETC concert".equals(item.getName());
+  }
+
+  private static boolean improvesWithAge(final Item item) {
+    return "Aged Brie".equals(item.getName());
   }
 }

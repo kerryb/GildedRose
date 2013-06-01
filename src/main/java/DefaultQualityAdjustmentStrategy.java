@@ -7,25 +7,15 @@ public class DefaultQualityAdjustmentStrategy implements Strategy {
 
   @Override
   public void run() {
-    if (getsBetterWithAge()) {
-      increaseQuality(item, 1);
-    } else {
-      if (hasSomeQualityLeft()) {
-        decrementQuality();
-      }
+    if (hasSomeQualityLeft()) {
+      decrementQuality();
     }
 
     if (hasExpired()) {
-      if (getsBetterWithAge()) {
-        if (isBelowMaximumQuality()) {
-          increaseQuality(item, 1);
-        }
+      if (hasSomeQualityLeft()) {
+        decrementQuality();
       } else {
-        if (hasSomeQualityLeft()) {
-          decrementQuality();
-        } else {
-          item.setQuality(0);
-        }
+        item.setQuality(0);
       }
     }
   }
@@ -38,20 +28,7 @@ public class DefaultQualityAdjustmentStrategy implements Strategy {
     return item.getQuality() > 0;
   }
 
-  private boolean isBelowMaximumQuality() {
-    return item.getQuality() < GildedRose.MAX_QUALITY;
-  }
-
-  private boolean getsBetterWithAge() {
-    return "Aged Brie".equals(item.getName());
-  }
-
   private void decrementQuality() {
     item.setQuality(item.getQuality() - 1);
-  }
-
-  private void increaseQuality(final Item item, int increment) {
-    int newQuality = item.getQuality() + increment;
-    item.setQuality(Math.min(newQuality, GildedRose.MAX_QUALITY));
   }
 }

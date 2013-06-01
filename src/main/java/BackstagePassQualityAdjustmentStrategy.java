@@ -7,12 +7,16 @@ public class BackstagePassQualityAdjustmentStrategy implements Strategy {
 
   @Override
   public void run() {
-    if (item.getSellIn() <= 0) {
+    if (hasExpired()) {
       item.setQuality(0);
     } else {
       int newQuality = item.getQuality() + qualityIncrement();
       item.setQuality(Math.min(newQuality, GildedRose.MAX_QUALITY));
     }
+  }
+
+  private boolean hasExpired() {
+    return item.getSellIn() <= 0;
   }
 
   private int qualityIncrement() {
