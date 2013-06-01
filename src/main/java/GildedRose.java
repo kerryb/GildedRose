@@ -29,26 +29,20 @@ public class GildedRose {
 
   private static void adjustQuality(final Item item) {
     if (!getsBetterWithAge(item)) {
-      if (hasSomeQualityLeft(item)) {
-        if (!isLegendary(item)) {
-          decrementQuality(item);
-        }
+      if (!isLegendary(item) && hasSomeQualityLeft(item)) {
+        decrementQuality(item);
       }
     } else {
       if (isBelowMaximumQuality(item)) {
         incrementQuality(item);
 
         if (isBackstagePass(item)) {
-          if (item.getSellIn() < 11) {
-            if (isBelowMaximumQuality(item)) {
-              incrementQuality(item);
-            }
+          if (item.getSellIn() < 11 && isBelowMaximumQuality(item)) {
+            incrementQuality(item);
           }
 
-          if (item.getSellIn() < 6) {
-            if (isBelowMaximumQuality(item)) {
-              incrementQuality(item);
-            }
+          if (item.getSellIn() < 6 && isBelowMaximumQuality(item)) {
+            incrementQuality(item);
           }
         }
       }
@@ -66,12 +60,8 @@ public class GildedRose {
           incrementQuality(item);
         }
       } else {
-        if (!isBackstagePass(item)) {
-          if (hasSomeQualityLeft(item)) {
-            if (!isLegendary(item)) {
-              decrementQuality(item);
-            }
-          }
+        if (!isBackstagePass(item) && !isLegendary(item) && hasSomeQualityLeft(item)) {
+          decrementQuality(item);
         } else {
           item.setQuality(item.getQuality() - item.getQuality());
         }
@@ -100,8 +90,7 @@ public class GildedRose {
   }
 
   private static boolean getsBetterWithAge(final Item item) {
-    return "Aged Brie".equals(item.getName()) ||
-        isBackstagePass(item);
+    return "Aged Brie".equals(item.getName()) || isBackstagePass(item);
   }
 
   private static void decrementSellIn(final Item item) {
