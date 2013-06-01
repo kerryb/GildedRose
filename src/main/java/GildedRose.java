@@ -22,14 +22,16 @@ public class GildedRose {
 
   public static void updateQuality() {
     for (Item item : items) {
-      decrementSellIn(item);
+      sellInAdjustmentStrategyFor(item).run();
       adjustQuality(item);
     }
   }
 
-  private static void decrementSellIn(final Item item) {
-    if (!isLegendary(item)) {
-      item.setSellIn(item.getSellIn() - 1);
+  private static Strategy sellInAdjustmentStrategyFor(final Item item) {
+    if (isLegendary(item)) {
+      return new NeverExpiringSellinAdjustmentStrategy();
+    } else {
+      return new DefaultSellInAdjustmentStrategy(item);
     }
   }
 
