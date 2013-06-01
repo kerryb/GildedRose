@@ -2,7 +2,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class GildedRose {
-  private static final int MAX_QUALITY = 50;
+  public static final int MAX_QUALITY = 50;
 
   static List<Item> items = null;
 
@@ -23,7 +23,7 @@ public class GildedRose {
   public static void updateQuality() {
     for (Item item : items) {
       sellInAdjustmentStrategyFor(item).run();
-      adjustQuality(item);
+      qualityAdjustmentStrategyFor(item).run();
     }
   }
 
@@ -35,72 +35,11 @@ public class GildedRose {
     }
   }
 
-  private static void adjustQuality(final Item item) {
-    if (getsBetterWithAge(item)) {
-      increaseQuality(item, qualityIncrement(item));
-    } else {
-      if (!isLegendary(item) && hasSomeQualityLeft(item)) {
-        decrementQuality(item);
-      }
-    }
-    
-    if (hasExpired(item)) {
-      if (getsBetterWithAge(item) && !isBackstagePass(item)) {
-        if (isBelowMaximumQuality(item)) {
-          increaseQuality(item, 1);
-        }
-      } else {
-        if (!isBackstagePass(item) && !isLegendary(item)
-            && hasSomeQualityLeft(item)) {
-          decrementQuality(item);
-        } else {
-          item.setQuality(item.getQuality() - item.getQuality());
-        }
-      }
-    }
-  }
-
-  private static boolean hasExpired(final Item item) {
-    return item.getSellIn() < 0;
-  }
-
-  private static boolean hasSomeQualityLeft(final Item item) {
-    return item.getQuality() > 0;
-  }
-
-  private static boolean isBelowMaximumQuality(final Item item) {
-    return item.getQuality() < MAX_QUALITY;
-  }
-
-  private static boolean isBackstagePass(final Item item) {
-    return "Backstage passes to a TAFKAL80ETC concert".equals(item.getName());
+  private static Strategy qualityAdjustmentStrategyFor(final Item item) {
+    return new DefaultQualityAdjustmentStrategyFor(item);
   }
 
   private static boolean isLegendary(final Item item) {
     return "Sulfuras, Hand of Ragnaros".equals(item.getName());
-  }
-
-  private static boolean getsBetterWithAge(final Item item) {
-    return "Aged Brie".equals(item.getName()) || isBackstagePass(item);
-  }
-
-  private static void decrementQuality(final Item item) {
-    item.setQuality(item.getQuality() - 1);
-  }
-
-  private static void increaseQuality(final Item item, int increment) {
-    int newQuality = item.getQuality() + increment;
-    item.setQuality(Math.min(newQuality, MAX_QUALITY));
-  }
-
-  private static int qualityIncrement(Item item) {
-    if (isBackstagePass(item)) {
-      if (item.getSellIn() <= 5) {
-        return 3;
-      } else if (item.getSellIn() <= 10) {
-        return 2;
-      }
-    }
-    return 1;
   }
 }
