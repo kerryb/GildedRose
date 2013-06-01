@@ -21,13 +21,13 @@ public class GildedRose {
 
   public static void updateQuality() {
     for (Item item : items) {
-      degradeQuality(item);
-      decrementSellIn(item);
       adjustQuality(item);
+      decrementSellIn(item);
+      adjustQualityAgainForSomeReason(item);
     }
   }
 
-  private static void degradeQuality(final Item item) {
+  private static void adjustQuality(final Item item) {
     if (!getsBetterWithAge(item)) {
       if (item.getQuality() > 0) {
         if (!isLegendary(item)) {
@@ -61,7 +61,7 @@ public class GildedRose {
     }
   }
 
-  private static void adjustQuality(final Item item) {
+  private static void adjustQualityAgainForSomeReason(final Item item) {
     if (item.getSellIn() < 0) {
       if ("Aged Brie".equals(item.getName())) {
         if (isBelowMaximumQuality(item)) {
