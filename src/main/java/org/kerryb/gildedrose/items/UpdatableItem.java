@@ -1,3 +1,6 @@
+package org.kerryb.gildedrose.items;
+import org.kerryb.gildedrose.strategies.Strategy;
+
 public abstract class UpdatableItem {
 
   protected Item item;

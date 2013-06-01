@@ -1,5 +1,10 @@
+package org.kerryb.gildedrose;
+
 import java.util.ArrayList;
 import java.util.List;
+
+import org.kerryb.gildedrose.items.Item;
+import org.kerryb.gildedrose.items.UpdatableItem;
 
 public class GildedRose {
   public static final int MAX_QUALITY = 50;

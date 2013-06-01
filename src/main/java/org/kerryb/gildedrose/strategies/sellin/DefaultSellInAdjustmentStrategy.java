@@ -1,3 +1,8 @@
+package org.kerryb.gildedrose.strategies.sellin;
+import org.kerryb.gildedrose.items.Item;
+import org.kerryb.gildedrose.strategies.Strategy;
+
+
 public class DefaultSellInAdjustmentStrategy implements Strategy {
   private Item item;
 

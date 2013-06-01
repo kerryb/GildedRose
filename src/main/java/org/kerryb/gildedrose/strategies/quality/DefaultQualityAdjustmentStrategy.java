@@ -1,3 +1,8 @@
+package org.kerryb.gildedrose.strategies.quality;
+import org.kerryb.gildedrose.items.Item;
+import org.kerryb.gildedrose.strategies.Strategy;
+
+
 public class DefaultQualityAdjustmentStrategy implements Strategy {
   private Item item;
 

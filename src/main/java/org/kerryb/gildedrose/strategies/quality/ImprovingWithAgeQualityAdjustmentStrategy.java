@@ -1,3 +1,9 @@
+package org.kerryb.gildedrose.strategies.quality;
+import org.kerryb.gildedrose.GildedRose;
+import org.kerryb.gildedrose.items.Item;
+import org.kerryb.gildedrose.strategies.Strategy;
+
+
 public class ImprovingWithAgeQualityAdjustmentStrategy implements Strategy {
   private Item item;
 
