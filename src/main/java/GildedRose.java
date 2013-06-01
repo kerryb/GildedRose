@@ -22,8 +22,8 @@ public class GildedRose {
 
   public static void updateQuality() {
     for (Item item : items) {
-      adjustQuality(item);
       decrementSellIn(item);
+      adjustQuality(item);
       adjustQualityAgainForSomeReason(item);
     }
   }
