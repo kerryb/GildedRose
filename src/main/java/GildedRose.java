@@ -57,7 +57,7 @@ public class GildedRose {
 
   private static void adjustQualityAgainForSomeReason(final Item item) {
     if (hasExpired(item)) {
-      if ("Aged Brie".equals(item.getName())) {
+      if (getsBetterWithAge(item) && !isBackstagePass(item)) {
         if (isBelowMaximumQuality(item)) {
           incrementQuality(item);
         }
