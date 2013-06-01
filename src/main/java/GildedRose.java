@@ -22,24 +22,7 @@ public class GildedRose {
 
   public static void updateQuality() {
     for (Item item : items) {
-      sellInAdjustmentStrategyFor(item).run();
-      qualityAdjustmentStrategyFor(item).run();
+      UpdatableItem.forItem(item).update();
     }
-  }
-
-  private static Strategy sellInAdjustmentStrategyFor(final Item item) {
-    if (isLegendary(item)) {
-      return new NeverExpiringSellinAdjustmentStrategy();
-    } else {
-      return new DefaultSellInAdjustmentStrategy(item);
-    }
-  }
-
-  private static Strategy qualityAdjustmentStrategyFor(final Item item) {
-    return new DefaultQualityAdjustmentStrategyFor(item);
-  }
-
-  private static boolean isLegendary(final Item item) {
-    return "Sulfuras, Hand of Ragnaros".equals(item.getName());
   }
 }
