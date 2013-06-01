@@ -24,7 +24,12 @@ public class GildedRose {
     for (Item item : items) {
       decrementSellIn(item);
       adjustQuality(item);
-      adjustQualityAgainForSomeReason(item);
+    }
+  }
+
+  private static void decrementSellIn(final Item item) {
+    if (!isLegendary(item)) {
+      item.setSellIn(item.getSellIn() - 1);
     }
   }
 
@@ -36,15 +41,7 @@ public class GildedRose {
         decrementQuality(item);
       }
     }
-  }
-
-  private static void decrementSellIn(final Item item) {
-    if (!isLegendary(item)) {
-      item.setSellIn(item.getSellIn() - 1);
-    }
-  }
-
-  private static void adjustQualityAgainForSomeReason(final Item item) {
+    
     if (hasExpired(item)) {
       if (getsBetterWithAge(item) && !isBackstagePass(item)) {
         if (isBelowMaximumQuality(item)) {
