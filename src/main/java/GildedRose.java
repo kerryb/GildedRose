@@ -2,7 +2,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class GildedRose {
-  // Made default visibility as a step towards testability
+  private static final int MAX_QUALITY = 50;
+
   static List<Item> items = null;
 
   public static void main(String[] args) {
@@ -69,7 +70,7 @@ public class GildedRose {
   }
 
   private static boolean isBelowMaximumQuality(final Item item) {
-    return item.getQuality() < 50;
+    return item.getQuality() < MAX_QUALITY;
   }
 
   private static boolean isBackstagePass(final Item item) {
@@ -90,7 +91,7 @@ public class GildedRose {
 
   private static void increaseQuality(final Item item, int increment) {
     int newQuality = item.getQuality() + increment;
-    item.setQuality(Math.min(newQuality, 50));
+    item.setQuality(Math.min(newQuality, MAX_QUALITY));
   }
 
   private static int qualityIncrement(Item item) {
