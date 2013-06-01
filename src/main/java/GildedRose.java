@@ -31,23 +31,23 @@ public class GildedRose {
     if (!getsBetterWithAge(item)) {
       if (item.getQuality() > 0) {
         if (!isLegendary(item)) {
-          item.setQuality(item.getQuality() - 1);
+          decrementQuality(item);
         }
       }
     } else {
       if (isBelowMaximumQuality(item)) {
-        item.setQuality(item.getQuality() + 1);
+        incrementQuality(item);
 
         if (isBackstagePass(item)) {
           if (item.getSellIn() < 11) {
             if (isBelowMaximumQuality(item)) {
-              item.setQuality(item.getQuality() + 1);
+              incrementQuality(item);
             }
           }
 
           if (item.getSellIn() < 6) {
             if (isBelowMaximumQuality(item)) {
-              item.setQuality(item.getQuality() + 1);
+              incrementQuality(item);
             }
           }
         }
@@ -55,23 +55,21 @@ public class GildedRose {
     }
   }
 
-  private static void decrementSellIn(final Item item) {
-    if (!isLegendary(item)) {
-      item.setSellIn(item.getSellIn() - 1);
-    }
+  private static void decrementSellin(final Item item) {
+    item.setSellIn(item.getSellIn() - 1);
   }
 
   private static void adjustQualityAgainForSomeReason(final Item item) {
     if (item.getSellIn() < 0) {
       if ("Aged Brie".equals(item.getName())) {
         if (isBelowMaximumQuality(item)) {
-          item.setQuality(item.getQuality() + 1);
+          incrementQuality(item);
         }
       } else {
         if (!isBackstagePass(item)) {
           if (item.getQuality() > 0) {
             if (!isLegendary(item)) {
-              item.setQuality(item.getQuality() - 1);
+              decrementQuality(item);
             }
           }
         } else {
@@ -98,4 +96,17 @@ public class GildedRose {
         isBackstagePass(item);
   }
 
+  private static void decrementSellIn(final Item item) {
+    if (!isLegendary(item)) {
+      decrementSellin(item);
+    }
+  }
+
+  private static void incrementQuality(final Item item) {
+    item.setQuality(item.getQuality() + 1);
+  }
+
+  private static void decrementQuality(final Item item) {
+    item.setQuality(item.getQuality() - 1);
+  }
 }
