@@ -1,4 +1,4 @@
-public class NeverExpiringSellinAdjustmentStrategy implements Strategy {
+public class NeverExpiringSellInAdjustmentStrategy implements Strategy {
   public void run() {
   }
 }

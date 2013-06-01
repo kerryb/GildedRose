@@ -1,11 +1,12 @@
-public class NormalItem extends UpdatableItem {
-  public NormalItem(final Item item) {
+public class LegendaryItem extends UpdatableItem {
+
+  public LegendaryItem(final Item item) {
     super(item);
   }
 
   @Override
   protected Strategy sellInAdjustmentStrategy() {
-    return new DefaultSellInAdjustmentStrategy(item);
+    return new NeverExpiringSellInAdjustmentStrategy();
   }
 
   @Override

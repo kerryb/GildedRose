@@ -12,22 +12,18 @@ public abstract class UpdatableItem {
   }
 
   public static UpdatableItem forItem(final Item item) {
-    return new NormalItem(item);
-  }
-
-  private Strategy sellInAdjustmentStrategy() {
-    if (isLegendary()) {
-      return new NeverExpiringSellinAdjustmentStrategy();
+    if (isLegendary(item)) {
+      return new LegendaryItem(item);
     } else {
-      return new DefaultSellInAdjustmentStrategy(item);
+      return new NormalItem(item);
     }
   }
 
-  private Strategy qualityAdjustmentStrategy() {
-    return new DefaultQualityAdjustmentStrategy(item);
-  }
+  protected abstract Strategy sellInAdjustmentStrategy();
 
-  private boolean isLegendary() {
+  protected abstract Strategy qualityAdjustmentStrategy();
+
+  private static boolean isLegendary(final Item item) {
     return "Sulfuras, Hand of Ragnaros".equals(item.getName());
   }
 }
