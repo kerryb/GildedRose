@@ -14,6 +14,8 @@ public abstract class UpdatableItem {
   public static UpdatableItem forItem(final Item item) {
     if (isLegendary(item)) {
       return new LegendaryItem(item);
+    } else if (isBackstagePass(item)) {
+      return new BackStagePass(item);
     } else {
       return new NormalItem(item);
     }
@@ -25,5 +27,9 @@ public abstract class UpdatableItem {
 
   private static boolean isLegendary(final Item item) {
     return "Sulfuras, Hand of Ragnaros".equals(item.getName());
+  }
+
+  private static boolean isBackstagePass(final Item item) {
+    return "Backstage passes to a TAFKAL80ETC concert".equals(item.getName());
   }
 }

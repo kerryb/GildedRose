@@ -1,5 +1,4 @@
 public class DefaultQualityAdjustmentStrategy implements Strategy {
-
   private Item item;
 
   public DefaultQualityAdjustmentStrategy(final Item item) {
@@ -9,7 +8,7 @@ public class DefaultQualityAdjustmentStrategy implements Strategy {
   @Override
   public void run() {
     if (getsBetterWithAge()) {
-      increaseQuality(item, qualityIncrement());
+      increaseQuality(item, 1);
     } else {
       if (hasSomeQualityLeft()) {
         decrementQuality();
@@ -17,12 +16,12 @@ public class DefaultQualityAdjustmentStrategy implements Strategy {
     }
 
     if (hasExpired()) {
-      if (getsBetterWithAge() && !isBackstagePass()) {
+      if (getsBetterWithAge()) {
         if (isBelowMaximumQuality()) {
           increaseQuality(item, 1);
         }
       } else {
-        if (!isBackstagePass() && hasSomeQualityLeft()) {
+        if (hasSomeQualityLeft()) {
           decrementQuality();
         } else {
           item.setQuality(0);
@@ -43,12 +42,8 @@ public class DefaultQualityAdjustmentStrategy implements Strategy {
     return item.getQuality() < GildedRose.MAX_QUALITY;
   }
 
-  private boolean isBackstagePass() {
-    return "Backstage passes to a TAFKAL80ETC concert".equals(item.getName());
-  }
-
   private boolean getsBetterWithAge() {
-    return "Aged Brie".equals(item.getName()) || isBackstagePass();
+    return "Aged Brie".equals(item.getName());
   }
 
   private void decrementQuality() {
@@ -58,16 +53,5 @@ public class DefaultQualityAdjustmentStrategy implements Strategy {
   private void increaseQuality(final Item item, int increment) {
     int newQuality = item.getQuality() + increment;
     item.setQuality(Math.min(newQuality, GildedRose.MAX_QUALITY));
-  }
-
-  private int qualityIncrement() {
-    if (isBackstagePass()) {
-      if (item.getSellIn() <= 5) {
-        return 3;
-      } else if (item.getSellIn() <= 10) {
-        return 2;
-      }
-    }
-    return 1;
   }
 }
