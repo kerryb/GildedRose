@@ -7,28 +7,18 @@ public class DefaultQualityAdjustmentStrategy implements Strategy {
 
   @Override
   public void run() {
-    if (hasSomeQualityLeft()) {
-      decrementQuality();
-    }
+    item.setQuality(Math.max(item.getQuality() - decrement(), 0));
+  }
 
+  private int decrement() {
     if (hasExpired()) {
-      if (hasSomeQualityLeft()) {
-        decrementQuality();
-      } else {
-        item.setQuality(0);
-      }
+      return 2;
+    } else {
+      return 1;
     }
   }
 
   private boolean hasExpired() {
     return item.getSellIn() < 0;
-  }
-
-  private boolean hasSomeQualityLeft() {
-    return item.getQuality() > 0;
-  }
-
-  private void decrementQuality() {
-    item.setQuality(item.getQuality() - 1);
   }
 }
