@@ -28,20 +28,8 @@ public class GildedRose {
   }
 
   private static void adjustQuality(final Item item) {
-    if (getsBetterWithAge(item)) {      
-      if (isBelowMaximumQuality(item)) {
-        incrementQuality(item);
-
-        if (isBackstagePass(item)) {
-          if (item.getSellIn() < 11 && isBelowMaximumQuality(item)) {
-            incrementQuality(item);
-          }
-
-          if (item.getSellIn() < 6 && isBelowMaximumQuality(item)) {
-            incrementQuality(item);
-          }
-        }
-      }
+    if (getsBetterWithAge(item)) {
+      increaseQuality(item, qualityIncrement(item));
     } else {
       if (!isLegendary(item) && hasSomeQualityLeft(item)) {
         decrementQuality(item);
@@ -59,10 +47,11 @@ public class GildedRose {
     if (hasExpired(item)) {
       if (getsBetterWithAge(item) && !isBackstagePass(item)) {
         if (isBelowMaximumQuality(item)) {
-          incrementQuality(item);
+          increaseQuality(item, 1);
         }
       } else {
-        if (!isBackstagePass(item) && !isLegendary(item) && hasSomeQualityLeft(item)) {
+        if (!isBackstagePass(item) && !isLegendary(item)
+            && hasSomeQualityLeft(item)) {
           decrementQuality(item);
         } else {
           item.setQuality(item.getQuality() - item.getQuality());
@@ -95,11 +84,23 @@ public class GildedRose {
     return "Aged Brie".equals(item.getName()) || isBackstagePass(item);
   }
 
-  private static void incrementQuality(final Item item) {
-    item.setQuality(item.getQuality() + 1);
-  }
-
   private static void decrementQuality(final Item item) {
     item.setQuality(item.getQuality() - 1);
+  }
+
+  private static void increaseQuality(final Item item, int increment) {
+    int newQuality = item.getQuality() + increment;
+    item.setQuality(Math.min(newQuality, 50));
+  }
+
+  private static int qualityIncrement(Item item) {
+    if (isBackstagePass(item)) {
+      if (item.getSellIn() <= 5) {
+        return 3;
+      } else if (item.getSellIn() <= 10) {
+        return 2;
+      }
+    }
+    return 1;
   }
 }
