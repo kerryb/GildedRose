@@ -27,27 +27,26 @@ public class GildedRose {
     }
   }
 
-  private static void degradeQuality(Item item) {
-    if ((!"Aged Brie".equals(item.getName()))
-        && !"Backstage passes to a TAFKAL80ETC concert".equals(item.getName())) {
+  private static void degradeQuality(final Item item) {
+    if (!getsBetterWithAge(item)) {
       if (item.getQuality() > 0) {
-        if (!"Sulfuras, Hand of Ragnaros".equals(item.getName())) {
+        if (!isLegendary(item)) {
           item.setQuality(item.getQuality() - 1);
         }
       }
     } else {
-      if (item.getQuality() < 50) {
+      if (isBelowMaximumQuality(item)) {
         item.setQuality(item.getQuality() + 1);
 
-        if ("Backstage passes to a TAFKAL80ETC concert".equals(item.getName())) {
+        if (isBackstagePass(item)) {
           if (item.getSellIn() < 11) {
-            if (item.getQuality() < 50) {
+            if (isBelowMaximumQuality(item)) {
               item.setQuality(item.getQuality() + 1);
             }
           }
 
           if (item.getSellIn() < 6) {
-            if (item.getQuality() < 50) {
+            if (isBelowMaximumQuality(item)) {
               item.setQuality(item.getQuality() + 1);
             }
           }
@@ -56,22 +55,22 @@ public class GildedRose {
     }
   }
 
-  private static void decrementSellIn(Item item) {
-    if (!"Sulfuras, Hand of Ragnaros".equals(item.getName())) {
+  private static void decrementSellIn(final Item item) {
+    if (!isLegendary(item)) {
       item.setSellIn(item.getSellIn() - 1);
     }
   }
 
-  private static void adjustQuality(Item item) {
+  private static void adjustQuality(final Item item) {
     if (item.getSellIn() < 0) {
       if ("Aged Brie".equals(item.getName())) {
-        if (item.getQuality() < 50) {
+        if (isBelowMaximumQuality(item)) {
           item.setQuality(item.getQuality() + 1);
         }
       } else {
-        if (!"Backstage passes to a TAFKAL80ETC concert".equals(item .getName())) {
+        if (!isBackstagePass(item)) {
           if (item.getQuality() > 0) {
-            if (!"Sulfuras, Hand of Ragnaros".equals(item.getName())) {
+            if (!isLegendary(item)) {
               item.setQuality(item.getQuality() - 1);
             }
           }
@@ -80,6 +79,23 @@ public class GildedRose {
         }
       }
     }
+  }
+
+  private static boolean isBackstagePass(final Item item) {
+    return "Backstage passes to a TAFKAL80ETC concert".equals(item.getName());
+  }
+
+  private static boolean isBelowMaximumQuality(final Item item) {
+    return item.getQuality() < 50;
+  }
+
+  private static boolean isLegendary(final Item item) {
+    return "Sulfuras, Hand of Ragnaros".equals(item.getName());
+  }
+
+  private static boolean getsBetterWithAge(final Item item) {
+    return "Aged Brie".equals(item.getName()) ||
+        isBackstagePass(item);
   }
 
 }
