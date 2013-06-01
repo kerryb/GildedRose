@@ -3,10 +3,10 @@ import org.kerryb.gildedrose.items.UpdatableItem;
 import org.kerryb.gildedrose.strategies.Strategy;
 
 
-public class ImprovingWithAgeQualityAdjustmentStrategy implements Strategy {
+public class IncreasingQualityAdjustmentStrategy implements Strategy {
   private UpdatableItem item;
 
-  public ImprovingWithAgeQualityAdjustmentStrategy(final UpdatableItem item) {
+  public IncreasingQualityAdjustmentStrategy(final UpdatableItem item) {
     this.item = item;
   }
 

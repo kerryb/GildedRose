@@ -1,6 +1,6 @@
 package org.kerryb.gildedrose.items;
 import org.kerryb.gildedrose.strategies.Strategy;
-import org.kerryb.gildedrose.strategies.quality.ImprovingWithAgeQualityAdjustmentStrategy;
+import org.kerryb.gildedrose.strategies.quality.IncreasingQualityAdjustmentStrategy;
 import org.kerryb.gildedrose.strategies.sellin.DefaultSellInAdjustmentStrategy;
 
 public class ImprovingWithAgeItem extends UpdatableItem {
@@ -15,6 +15,6 @@ public class ImprovingWithAgeItem extends UpdatableItem {
 
   @Override
   protected Strategy qualityAdjustmentStrategy() {
-    return new ImprovingWithAgeQualityAdjustmentStrategy(this);
+    return new IncreasingQualityAdjustmentStrategy(this);
   }
 }
