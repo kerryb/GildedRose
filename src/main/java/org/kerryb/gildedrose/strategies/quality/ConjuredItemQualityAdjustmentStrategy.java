@@ -12,6 +12,14 @@ public class ConjuredItemQualityAdjustmentStrategy implements Strategy {
 
   @Override
   public void run() {
-    item.decreaseQualityBy(2);
+    item.decreaseQualityBy(decrement());
+  }
+
+  private int decrement() {
+    if (item.hasExpired()) {
+      return 4;
+    } else {
+      return 2;
+    }
   }
 }
