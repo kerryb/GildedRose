@@ -1,7 +1,7 @@
 package org.kerryb.gildedrose.items;
 
 import org.kerryb.gildedrose.strategies.Strategy;
-import org.kerryb.gildedrose.strategies.quality.ConjuredItemQualityAdjustmentStrategy;
+import org.kerryb.gildedrose.strategies.quality.DecreasingQualityAdjustmentStrategy;
 import org.kerryb.gildedrose.strategies.sellin.DefaultSellInAdjustmentStrategy;
 
 public class ConjuredItem extends UpdatableItem {
@@ -16,6 +16,6 @@ public class ConjuredItem extends UpdatableItem {
 
   @Override
   protected Strategy qualityAdjustmentStrategy() {
-    return new ConjuredItemQualityAdjustmentStrategy(this);
+    return new DecreasingQualityAdjustmentStrategy(this, 2);
   }
 }

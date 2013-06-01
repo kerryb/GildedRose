@@ -3,11 +3,13 @@ import org.kerryb.gildedrose.items.UpdatableItem;
 import org.kerryb.gildedrose.strategies.Strategy;
 
 
-public class DefaultQualityAdjustmentStrategy implements Strategy {
+public class DecreasingQualityAdjustmentStrategy implements Strategy {
   private UpdatableItem item;
+  private int rate;
 
-  public DefaultQualityAdjustmentStrategy(final UpdatableItem item) {
+  public DecreasingQualityAdjustmentStrategy(final UpdatableItem item, final int rate) {
     this.item = item;
+    this.rate = rate;
   }
 
   @Override
@@ -17,9 +19,9 @@ public class DefaultQualityAdjustmentStrategy implements Strategy {
 
   private int decrement() {
     if (item.hasExpired()) {
-      return 2;
+      return rate * 2;
     } else {
-      return 1;
+      return rate;
     }
   }
 }

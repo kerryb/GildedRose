@@ -1,6 +1,6 @@
 package org.kerryb.gildedrose.items;
 import org.kerryb.gildedrose.strategies.Strategy;
-import org.kerryb.gildedrose.strategies.quality.DefaultQualityAdjustmentStrategy;
+import org.kerryb.gildedrose.strategies.quality.DecreasingQualityAdjustmentStrategy;
 import org.kerryb.gildedrose.strategies.sellin.DefaultSellInAdjustmentStrategy;
 
 public class NormalItem extends UpdatableItem {
@@ -15,6 +15,6 @@ public class NormalItem extends UpdatableItem {
 
   @Override
   protected Strategy qualityAdjustmentStrategy() {
-    return new DefaultQualityAdjustmentStrategy(this);
+    return new DecreasingQualityAdjustmentStrategy(this, 1);
   }
 }
