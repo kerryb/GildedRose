@@ -28,11 +28,7 @@ public class GildedRose {
   }
 
   private static void adjustQuality(final Item item) {
-    if (!getsBetterWithAge(item)) {
-      if (!isLegendary(item) && hasSomeQualityLeft(item)) {
-        decrementQuality(item);
-      }
-    } else {
+    if (getsBetterWithAge(item)) {      
       if (isBelowMaximumQuality(item)) {
         incrementQuality(item);
 
@@ -45,6 +41,10 @@ public class GildedRose {
             incrementQuality(item);
           }
         }
+      }
+    } else {
+      if (!isLegendary(item) && hasSomeQualityLeft(item)) {
+        decrementQuality(item);
       }
     }
   }
