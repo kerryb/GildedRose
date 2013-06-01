@@ -1,19 +1,16 @@
 package org.kerryb.gildedrose.strategies.quality;
-import org.kerryb.gildedrose.GildedRose;
-import org.kerryb.gildedrose.items.Item;
+import org.kerryb.gildedrose.items.UpdatableItem;
 import org.kerryb.gildedrose.strategies.Strategy;
 
 
 public class ImprovingWithAgeQualityAdjustmentStrategy implements Strategy {
-  private Item item;
+  private UpdatableItem item;
 
-  public ImprovingWithAgeQualityAdjustmentStrategy(final Item item) {
+  public ImprovingWithAgeQualityAdjustmentStrategy(final UpdatableItem item) {
     this.item = item;
   }
 
   public void run() {
-    if (item.getQuality() < GildedRose.MAX_QUALITY) {
-      item.setQuality(item.getQuality() + 1);
-    }
+    item.increaseQualityBy(1);
   }
 }

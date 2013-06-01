@@ -1,16 +1,16 @@
 package org.kerryb.gildedrose.strategies.sellin;
-import org.kerryb.gildedrose.items.Item;
+import org.kerryb.gildedrose.items.UpdatableItem;
 import org.kerryb.gildedrose.strategies.Strategy;
 
 
 public class DefaultSellInAdjustmentStrategy implements Strategy {
-  private Item item;
+  private UpdatableItem item;
 
-  public DefaultSellInAdjustmentStrategy(Item item) {
+  public DefaultSellInAdjustmentStrategy(UpdatableItem item) {
     this.item = item;
   }
 
   public void run() {
-    item.setSellIn(item.getSellIn() - 1);
+    item.decreaseSellIn();
   }
 }

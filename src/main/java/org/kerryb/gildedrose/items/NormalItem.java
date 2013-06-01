@@ -10,11 +10,11 @@ public class NormalItem extends UpdatableItem {
 
   @Override
   protected Strategy sellInAdjustmentStrategy() {
-    return new DefaultSellInAdjustmentStrategy(item);
+    return new DefaultSellInAdjustmentStrategy(this);
   }
 
   @Override
   protected Strategy qualityAdjustmentStrategy() {
-    return new DefaultQualityAdjustmentStrategy(item);
+    return new DefaultQualityAdjustmentStrategy(this);
   }
 }

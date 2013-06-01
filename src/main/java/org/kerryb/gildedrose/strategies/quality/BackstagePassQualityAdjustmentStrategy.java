@@ -1,34 +1,27 @@
 package org.kerryb.gildedrose.strategies.quality;
-import org.kerryb.gildedrose.GildedRose;
-import org.kerryb.gildedrose.items.Item;
+import org.kerryb.gildedrose.items.UpdatableItem;
 import org.kerryb.gildedrose.strategies.Strategy;
 
-
 public class BackstagePassQualityAdjustmentStrategy implements Strategy {
-  private Item item;
+  private UpdatableItem item;
 
-  public BackstagePassQualityAdjustmentStrategy(final Item item) {
+  public BackstagePassQualityAdjustmentStrategy(final UpdatableItem item) {
     this.item = item;
   }
 
   @Override
   public void run() {
-    if (hasExpired()) {
-      item.setQuality(0);
+    if (item.hasExpired()) {
+      item.setQualityToZero();
     } else {
-      int newQuality = item.getQuality() + qualityIncrement();
-      item.setQuality(Math.min(newQuality, GildedRose.MAX_QUALITY));
+      item.increaseQualityBy(qualityIncrement());
     }
   }
 
-  private boolean hasExpired() {
-    return item.getSellIn() <= 0;
-  }
-
   private int qualityIncrement() {
-    if (item.getSellIn() <= 5) {
+    if (item.mustBeSoldInTheNext(5)) {
       return 3;
-    } else if (item.getSellIn() <= 10) {
+    } else if (item.mustBeSoldInTheNext(10)) {
       return 2;
     } else {
       return 1;

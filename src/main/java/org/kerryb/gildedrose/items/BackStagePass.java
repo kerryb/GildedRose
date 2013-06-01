@@ -11,11 +11,11 @@ public class BackStagePass extends UpdatableItem {
 
   @Override
   protected Strategy sellInAdjustmentStrategy() {
-    return new DefaultSellInAdjustmentStrategy(item);
+    return new DefaultSellInAdjustmentStrategy(this);
   }
 
   @Override
   protected Strategy qualityAdjustmentStrategy() {
-    return new BackstagePassQualityAdjustmentStrategy(item);
+    return new BackstagePassQualityAdjustmentStrategy(this);
   }
 }

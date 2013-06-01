@@ -7,8 +7,6 @@ import org.kerryb.gildedrose.items.Item;
 import org.kerryb.gildedrose.items.UpdatableItem;
 
 public class GildedRose {
-  public static final int MAX_QUALITY = 50;
-
   static List<Item> items = null;
 
   public static void main(String[] args) {

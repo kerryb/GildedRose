@@ -1,29 +1,25 @@
 package org.kerryb.gildedrose.strategies.quality;
-import org.kerryb.gildedrose.items.Item;
+import org.kerryb.gildedrose.items.UpdatableItem;
 import org.kerryb.gildedrose.strategies.Strategy;
 
 
 public class DefaultQualityAdjustmentStrategy implements Strategy {
-  private Item item;
+  private UpdatableItem item;
 
-  public DefaultQualityAdjustmentStrategy(final Item item) {
+  public DefaultQualityAdjustmentStrategy(final UpdatableItem item) {
     this.item = item;
   }
 
   @Override
   public void run() {
-    item.setQuality(Math.max(item.getQuality() - decrement(), 0));
+    item.decreaseQualityBy(decrement());
   }
 
   private int decrement() {
-    if (hasExpired()) {
+    if (item.hasExpired()) {
       return 2;
     } else {
       return 1;
     }
-  }
-
-  private boolean hasExpired() {
-    return item.getSellIn() < 0;
   }
 }

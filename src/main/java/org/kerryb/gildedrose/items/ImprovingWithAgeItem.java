@@ -10,11 +10,11 @@ public class ImprovingWithAgeItem extends UpdatableItem {
 
   @Override
   protected Strategy sellInAdjustmentStrategy() {
-    return new DefaultSellInAdjustmentStrategy(item);
+    return new DefaultSellInAdjustmentStrategy(this);
   }
 
   @Override
   protected Strategy qualityAdjustmentStrategy() {
-    return new ImprovingWithAgeQualityAdjustmentStrategy(item);
+    return new ImprovingWithAgeQualityAdjustmentStrategy(this);
   }
 }
