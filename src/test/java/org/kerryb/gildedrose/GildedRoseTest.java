@@ -78,6 +78,11 @@ public class GildedRoseTest {
     afterAnUpdateTheExpectedSellInAndQualityAre(9, 18);
   }
 
+  @Test public void whenAnExpiredConjuredItemIsUpdatedItsQualityDecreasesByFour() {
+    givenASingleItem(new Item(CONJURED_ITEM, 0, 20));
+    afterAnUpdateTheExpectedSellInAndQualityAre(-1, 16);
+  }
+
   // Test Helpers
   private void afterAnUpdateTheExpectedSellInAndQualityAre(int expectedSellIn, int expectedQuality) {
     GildedRose.updateQuality();
