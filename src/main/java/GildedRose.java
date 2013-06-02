@@ -37,26 +37,20 @@ public class GildedRose {
 
   private static void updateItemQuality(final Item item) {
     if ((!improvesWithAge(item)) && !isBackstagePass(item)) {
-      if (hasSomeQualityLeft(item)) {
-        if (!isLegendary(item)) {
-          decrementQuality(item);
-        }
+      if (hasSomeQualityLeft(item) && !isLegendary(item)) {
+        decrementQuality(item);
       }
     } else {
       if (isBelowMaximumQuality(item)) {
         incrementQuality(item);
 
         if (isBackstagePass(item)) {
-          if (item.getSellIn() < 11) {
-            if (isBelowMaximumQuality(item)) {
-              incrementQuality(item);
-            }
+          if (item.getSellIn() < 11 && isBelowMaximumQuality(item)) {
+            incrementQuality(item);
           }
 
-          if (item.getSellIn() < 6) {
-            if (isBelowMaximumQuality(item)) {
-              incrementQuality(item);
-            }
+          if (item.getSellIn() < 6 && isBelowMaximumQuality(item)) {
+            incrementQuality(item);
           }
         }
       }
@@ -64,12 +58,9 @@ public class GildedRose {
 
     if (item.getSellIn() < 0) {
       if (!improvesWithAge(item)) {
-        if (!isBackstagePass(item)) {
-          if (hasSomeQualityLeft(item)) {
-            if (!isLegendary(item)) {
-              decrementQuality(item);
-            }
-          }
+        if (!isBackstagePass(item) && hasSomeQualityLeft(item)
+            && !isLegendary(item)) {
+          decrementQuality(item);
         } else {
           item.setQuality(0);
         }
