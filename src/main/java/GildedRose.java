@@ -40,6 +40,8 @@ public class GildedRose {
       updateImprovingWithAgeQuality(item);
     } else if (isBackstagePass(item)) {
       updateBackstagePassQuality(item);
+    } else if (isConjured(item)) {
+      updateConjuredItemQuality(item);
     } else if (!isLegendary(item)) {
       updateNormalItemQuality(item);
     }
@@ -66,6 +68,14 @@ public class GildedRose {
         incrementQuality(item, 1);
       }
     }
+  }
+
+  private static void updateConjuredItemQuality(final Item item) {
+    if (item.getSellIn() < 0) {
+      decrementQuality(item, 4);
+    } else {
+      decrementQuality(item, 2);
+    }    
   }
 
   private static void updateNormalItemQuality(final Item item) {
@@ -102,6 +112,10 @@ public class GildedRose {
 
   private static boolean isLegendary(final Item item) {
     return "Sulfuras, Hand of Ragnaros".equals(item.getName());
+  }
+
+  private static boolean isConjured(final Item item) {
+    return "Conjured Mana Cake".equals(item.getName());
   }
 
   private static boolean improvesWithAge(final Item item) {
