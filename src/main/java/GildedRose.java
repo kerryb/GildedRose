@@ -20,18 +20,18 @@ public class GildedRose {
 
   public static void updateQuality() {
     for (final Item item : items) {
-      updateSellIn(item);
-      updateQuality(item);
+      updateItemSellIn(item);
+      updateItemQuality(item);
     }
   }
 
-  private static void updateSellIn(final Item item) {
+  private static void updateItemSellIn(final Item item) {
     if (!"Sulfuras, Hand of Ragnaros".equals(item.getName())) {
       item.setSellIn(item.getSellIn() - 1);
     }
   }
 
-  private static void updateQuality(final Item item) {
+  private static void updateItemQuality(final Item item) {
     if ((!"Aged Brie".equals(item.getName()))
         && !"Backstage passes to a TAFKAL80ETC concert".equals(item
             .getName())) {
