@@ -37,11 +37,7 @@ public class GildedRose {
 
   private static void updateItemQuality(final Item item) {
     if (improvesWithAge(item)) {
-      if (item.getSellIn() < 0) {
-        incrementQuality(item, 2);
-      } else {
-        incrementQuality(item, 1);
-      }
+      updateImprovingWithAgeQuality(item);
     } else if (isBackstagePass(item)) {
       incrementQuality(item, 1);
       if (item.getSellIn() < 11) {
@@ -63,6 +59,14 @@ public class GildedRose {
       } else {
         decrementQuality(item);
       }
+    }
+  }
+
+  private static void updateImprovingWithAgeQuality(final Item item) {
+    if (item.getSellIn() < 0) {
+      incrementQuality(item, 2);
+    } else {
+      incrementQuality(item, 1);
     }
   }
 
