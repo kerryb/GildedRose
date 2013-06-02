@@ -37,24 +37,24 @@ public class GildedRose {
 
   private static void updateItemQuality(final Item item) {
     if ((!improvesWithAge(item)) && !isBackstagePass(item)) {
-      if (item.getQuality() > 0) {
+      if (hasSomeQualityLeft(item)) {
         if (!isLegendary(item)) {
           decrementQuality(item);
         }
       }
     } else {
-      if (item.getQuality() < 50) {
+      if (isBelowMaximumQuality(item)) {
         incrementQuality(item);
 
         if (isBackstagePass(item)) {
           if (item.getSellIn() < 11) {
-            if (item.getQuality() < 50) {
+            if (isBelowMaximumQuality(item)) {
               incrementQuality(item);
             }
           }
 
           if (item.getSellIn() < 6) {
-            if (item.getQuality() < 50) {
+            if (isBelowMaximumQuality(item)) {
               incrementQuality(item);
             }
           }
@@ -65,7 +65,7 @@ public class GildedRose {
     if (item.getSellIn() < 0) {
       if (!improvesWithAge(item)) {
         if (!isBackstagePass(item)) {
-          if (item.getQuality() > 0) {
+          if (hasSomeQualityLeft(item)) {
             if (!isLegendary(item)) {
               decrementQuality(item);
             }
@@ -74,11 +74,19 @@ public class GildedRose {
           item.setQuality(0);
         }
       } else {
-        if (item.getQuality() < 50) {
+        if (isBelowMaximumQuality(item)) {
           incrementQuality(item);
         }
       }
     }
+  }
+
+  private static boolean isBelowMaximumQuality(final Item item) {
+    return item.getQuality() < 50;
+  }
+
+  private static boolean hasSomeQualityLeft(final Item item) {
+    return item.getQuality() > 0;
   }
 
   private static void incrementQuality(final Item item) {
