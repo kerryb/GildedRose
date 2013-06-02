@@ -36,17 +36,16 @@ public class GildedRose {
   }
 
   private static void updateItemQuality(final Item item) {
-    if (improvesWithAge(item) || isBackstagePass(item)) {
+    if (improvesWithAge(item)) {
       incrementQuality(item);
+    } else if (isBackstagePass(item)) {
+      incrementQuality(item);
+      if (item.getSellIn() < 11) {
+        incrementQuality(item);
+      }
 
-      if (isBackstagePass(item)) {
-        if (item.getSellIn() < 11) {
-          incrementQuality(item);
-        }
-
-        if (item.getSellIn() < 6) {
-          incrementQuality(item);
-        }
+      if (item.getSellIn() < 6) {
+        incrementQuality(item);
       }
     } else {
       if (hasSomeQualityLeft(item) && !isLegendary(item)) {
