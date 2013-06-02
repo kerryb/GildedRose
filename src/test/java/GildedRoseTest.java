@@ -11,6 +11,7 @@ public class GildedRoseTest {
   private static final String AGED_BRIE = "Aged Brie";
   private static final String SULFURAS = "Sulfuras, Hand of Ragnaros";
   private static final String BACKSTAGE_PASSES = "Backstage passes to a TAFKAL80ETC concert";
+  private static final String CONJURED_ITEM = "Conjured Mana Cake";
 
   private List<Item> items = new ArrayList<Item>();
 
@@ -66,6 +67,16 @@ public class GildedRoseTest {
   @Test public void whenBackstagePassesAreUpdatedAndTheSellByDateHasPassedTheirQualityDropsToZero() {
     givenASingleItem(new Item(BACKSTAGE_PASSES, 0, 50));
     afterAnUpdateTheExpectedSellInAndQualityAre(-1, 0);
+  }
+  
+  @Test public void whenAConjuredItemIsUpdatedItsQualityDecreasesByTwo() {
+    givenASingleItem(new Item(CONJURED_ITEM, 10, 20));
+    afterAnUpdateTheExpectedSellInAndQualityAre(9, 18);
+  }
+
+  @Test public void whenAnExpiredConjuredItemIsUpdatedItsQualityDecreasesByFour() {
+    givenASingleItem(new Item(CONJURED_ITEM, 0, 20));
+    afterAnUpdateTheExpectedSellInAndQualityAre(-1, 16);
   }
 
   // Test Helpers
