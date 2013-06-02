@@ -2,15 +2,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class GildedRose {
-
-  // Made default visibility as a step towards testability
   static List<Item> items = null;
 
-  /**
-   * @param args
-   */
   public static void main(String[] args) {
-
     System.out.println("OMGHAI!");
 
     items = new ArrayList<Item>();
