@@ -27,31 +27,35 @@ public class GildedRose {
 
   private static void updateItemSellIn(final Item item) {
     if (!isLegendary(item)) {
-      item.setSellIn(item.getSellIn() - 1);
+      decrementSellIn(item);
     }
+  }
+
+  private static void decrementSellIn(final Item item) {
+    item.setSellIn(item.getSellIn() - 1);
   }
 
   private static void updateItemQuality(final Item item) {
     if ((!improvesWithAge(item)) && !isBackstagePass(item)) {
       if (item.getQuality() > 0) {
         if (!isLegendary(item)) {
-          item.setQuality(item.getQuality() - 1);
+          decrementQuality(item);
         }
       }
     } else {
       if (item.getQuality() < 50) {
-        item.setQuality(item.getQuality() + 1);
+        incrementQuality(item);
 
         if (isBackstagePass(item)) {
           if (item.getSellIn() < 11) {
             if (item.getQuality() < 50) {
-              item.setQuality(item.getQuality() + 1);
+              incrementQuality(item);
             }
           }
 
           if (item.getSellIn() < 6) {
             if (item.getQuality() < 50) {
-              item.setQuality(item.getQuality() + 1);
+              incrementQuality(item);
             }
           }
         }
@@ -63,7 +67,7 @@ public class GildedRose {
         if (!isBackstagePass(item)) {
           if (item.getQuality() > 0) {
             if (!isLegendary(item)) {
-              item.setQuality(item.getQuality() - 1);
+              decrementQuality(item);
             }
           }
         } else {
@@ -71,10 +75,18 @@ public class GildedRose {
         }
       } else {
         if (item.getQuality() < 50) {
-          item.setQuality(item.getQuality() + 1);
+          incrementQuality(item);
         }
       }
     }
+  }
+
+  private static void incrementQuality(final Item item) {
+    item.setQuality(item.getQuality() + 1);
+  }
+
+  private static void decrementQuality(final Item item) {
+    item.setQuality(item.getQuality() - 1);
   }
 
   private static boolean isBackstagePass(final Item item) {
