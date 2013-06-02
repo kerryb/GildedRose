@@ -48,7 +48,7 @@ public class GildedRose {
         incrementQuality(item);
       }
     } else {
-      if (hasSomeQualityLeft(item) && !isLegendary(item)) {
+      if (!isLegendary(item)) {
         decrementQuality(item);
       }
     }
