@@ -20,9 +20,14 @@ public class GildedRose {
 
   public static void updateQuality() {
     for (final Item item : items) {
-      updateQuality(item);
       updateSellIn(item);
-      updateQualitySomeMore(item);
+      updateQuality(item);
+    }
+  }
+
+  private static void updateSellIn(final Item item) {
+    if (!"Sulfuras, Hand of Ragnaros".equals(item.getName())) {
+      item.setSellIn(item.getSellIn() - 1);
     }
   }
 
@@ -55,15 +60,7 @@ public class GildedRose {
         }
       }
     }
-  }
 
-  private static void updateSellIn(final Item item) {
-    if (!"Sulfuras, Hand of Ragnaros".equals(item.getName())) {
-      item.setSellIn(item.getSellIn() - 1);
-    }
-  }
-
-  private static void updateQualitySomeMore(final Item item) {
     if (item.getSellIn() < 0) {
       if (!"Aged Brie".equals(item.getName())) {
         if (!"Backstage passes to a TAFKAL80ETC concert".equals(item
