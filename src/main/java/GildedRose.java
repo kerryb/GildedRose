@@ -58,11 +58,10 @@ public class GildedRose {
       if (improvesWithAge(item)) {
         incrementQuality(item);
       } else {
-        if (!isBackstagePass(item) && hasSomeQualityLeft(item)
-            && !isLegendary(item)) {
-          decrementQuality(item);
-        } else {
+        if (isBackstagePass(item) || isLegendary(item)) {
           item.setQuality(0);
+        } else {
+          decrementQuality(item);
         }
       }
     }
@@ -83,7 +82,9 @@ public class GildedRose {
   }
 
   private static void decrementQuality(final Item item) {
-    item.setQuality(item.getQuality() - 1);
+    if (hasSomeQualityLeft(item)) {
+      item.setQuality(item.getQuality() - 1);
+    }
   }
 
   private static boolean isBackstagePass(final Item item) {
