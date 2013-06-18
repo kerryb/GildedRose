@@ -13,7 +13,7 @@ public class DecreasingQualityAdjustmentStrategy implements Strategy {
   }
 
   @Override
-  public void run() {
+  public void execute() {
     if (item.hasExpired()) {
       item.decreaseQualityBy(rate * 2);
     } else {

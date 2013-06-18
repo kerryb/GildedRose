@@ -11,8 +11,8 @@ public abstract class UpdatableItem {
   }
 
   public void update() {
-    sellInAdjustmentStrategy().run();
-    qualityAdjustmentStrategy().run();
+    sellInAdjustmentStrategy().execute();
+    qualityAdjustmentStrategy().execute();
   }
 
   public static UpdatableItem forItem(final Item item) {

@@ -10,7 +10,7 @@ public class BackstagePassQualityAdjustmentStrategy implements Strategy {
   }
 
   @Override
-  public void run() {
+  public void execute() {
     if (item.hasExpired()) {
       item.setQualityToZero();
     } else {

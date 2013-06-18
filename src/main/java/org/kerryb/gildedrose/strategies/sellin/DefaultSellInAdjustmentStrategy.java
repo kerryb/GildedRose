@@ -10,7 +10,7 @@ public class DefaultSellInAdjustmentStrategy implements Strategy {
     this.item = item;
   }
 
-  public void run() {
+  public void execute() {
     item.decreaseSellIn();
   }
 }
